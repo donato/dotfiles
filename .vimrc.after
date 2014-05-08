@@ -2,17 +2,18 @@
 set tabstop=4
 set shiftwidth=4
 set expandtab
- 
+
 " Line break stuff
  highlight OverLength ctermbg=red ctermfg=white guibg=#592929
  set showbreak=>\ wrap linebreak textwidth=0
  match OverLength /\%101v.\+/
 
+
 " " Persistent undo history
 " set undodir=~/.vim/undohistory
 " set undofile
-" 
-" 
+
+
 " " Somehow this isn't automatic
 " set backspace=2
 
@@ -20,14 +21,14 @@ set expandtab
 
 " This makes faster load time for when there is no XServer 
 set clipboard=exclude:.*
- 
+
 " Some personal remappings
 map <S-Enter> O<Esc>j
-imap jj <Esc> 
+imap jj <Esc>
 
 set encoding=utf-8
 set fileencoding=utf-8
 
 set guifont=Inconsolata\ 10
 
-colorscheme koehler
+" colorscheme koehler

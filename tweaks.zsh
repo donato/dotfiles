@@ -15,12 +15,13 @@ alias ls='ls --color=auto'
 alias screen='screen -dR'
 alias gj='grep -r --include="*.js" --exclude="*.min.js" --exclude-dir="node_modules"'
 alias gjc='grep -r --include="*.js" --include="*.css" --exclude="*.min.js" --exclude="*.min.css" --exclude-dir="node_modules"'
-alias gvim="vim -g"
 
 
-export VIMRUNTIME=~/local/vim/runtime
+## alias gvim="vim -g"
+## export VIMRUNTIME=~/local/vim/runtime
 
-export P4MERGE=`which p4merge 2>/dev/null`
-export P4DIFF=`which p4merge 2>/dev/null`
-export P4EDITOR=`which vim`
+## Perforce settings
+# export P4MERGE=`which p4merge 2>/dev/null`
+# export P4DIFF=`which p4merge 2>/dev/null`
+# export P4EDITOR=`which vim`
 
