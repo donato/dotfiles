@@ -1,0 +1,3 @@
+tasks:
+  - include: install-dependencies
+  - include: link-dotfiles

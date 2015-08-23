@@ -1,0 +1,3 @@
+[submodule "libs/prezto"]
+	path = libs/prezto
+	url = https://github.com/donato/prezto.git

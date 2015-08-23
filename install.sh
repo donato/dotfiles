@@ -1,21 +1,32 @@
-#!/bin/env bash
+#!/bin/sh
+
+## Sanity check
+sudo apt-get install git
+
+## Set up dotfiles repo
+git clone git://github.com/donato/dotfiles.git "$HOME/git/dotfiles"
+cd $HOME/git/dotfiles
+git pull --rebase
+git submodule update --init --recursive
+
+## Setup ansible
+git clone git://github.com/ansible/ansible.git "$HOME/git/ansible"
+sudo apt-get install python-pip
+sudo pip install paramiko PyYAML Jinja2 httplib2 six
+cd $HOME/git/ansible/
+git pull --rebase
+git submodule update --init --recursive
+source hacking/env-setup
 
 
-## Install yadr-ubuntu
 
-## Link up the dotfiles
-ln -s ~/dotfiles/.bashrc ~/.bashrc
-ln -s ~/.dotfiles/update_paths.zsh  ~/.zsh.after/update_paths.zsh
-ln -s ~/.dotfiles/.vimrc.after  ~/.vimrc.after
-ln -s ~/.dotfiles/tweaks.zsh  ~/.zsh.after/tweaks.zsh
-# ln -s ~/.yadr/fonts ~/.fonts
+# Now run ansible init script locally
+### Setup local host connection
+mkdir -p "$HOME/ansible"
+echo "127.0.0.1 ansible_connection=local" > "$HOME/ansible/inventory"
+export ANSIBLE_INVENTORY=$HOME/ansible/inventory
 
+### Run it
+cd $HOME/git/dotfiles
+ansible-playbook tasks/setup-local-dev
 
-# .jshintrc
-# .prompt
-# .tmux.conf
-# .hgrc
-# .gitconifg
-# .bash_aliases
-#
-# Inconsolata XL 12,Inconsolata 15,Monaco 12 
