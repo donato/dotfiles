@@ -1,7 +1,19 @@
 #!/bin/sh
 
+if [ "$(uname)" == "Darwin" ]; then
+    # Do something under Mac OS X platform   
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    get=brew
+elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+    # Do something under Linux platform
+    get=apt-get
+elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ]; then
+    # Do something under Windows NT platform
+    echo "Uncharted territory!"
+fi
+
 ## Sanity check
-sudo apt-get install git
+sudo $get install git
 
 ## Set up dotfiles repo
 git clone git://github.com/donato/dotfiles.git "$HOME/git/dotfiles"
@@ -11,7 +23,7 @@ git submodule update --init --recursive
 
 ## Setup ansible
 git clone git://github.com/ansible/ansible.git "$HOME/git/ansible"
-sudo apt-get install python-pip
+sudo $get install python-pip
 sudo pip install paramiko PyYAML Jinja2 httplib2 six
 cd $HOME/git/ansible/
 git pull --rebase
