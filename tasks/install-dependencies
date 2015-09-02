@@ -1,26 +1,22 @@
-- hosts: all
-- sudo : true
+#- vars:
+  #lamp_stack:
+    #- apache2
+    #- mysql-server
+    #- libapache2-mod-auth-mysql
+    #- php5-mysql
+    #- php5
+    #- libapache2-mod-php5
+    #- php5-mcrypt
+#
+  #dev_computer:
+    #- vagrant
+    #- build-essential
+#
 
-  vars:
-    lamp_stack:
-      - apache2
-      - mysql-server
-      - libapache2-mod-auth-mysql
-      - php5-mysql
-      - php5
-      - libapache2-mod-php5
-      - php5-mcrypt
-
-    dev_computer:
-      - vagrant
-      - build-essential
-
-
-  tasks:  
-    - name: Install libraries
-      apt: name={{ item }} state=present
-      with_items:
-        - vim
-        - git
-        - zsh
-        - lftp
+- name: Install libraries
+  apt: name={{ item }} state=present
+  with_items:
+    - vim
+    - git
+    - zsh
+    - lftp

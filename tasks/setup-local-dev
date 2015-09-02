@@ -1,3 +1,6 @@
-tasks:
-  - include: install-dependencies
-  - include: link-dotfiles
+---
+- hosts: all
+  sudo: true
+  tasks:
+    - include: install-dependencies
+    - include: link-dotfiles

@@ -1,34 +1,31 @@
 ---
-- hosts: all
-  vars:
-    home: /home/donato
-    dotfiles_repo: ~/git/dotfiles
-    prezto_files:
+- set_fact:
+    home: /Users/donatoborrello
+    dotfiles_repo: /Users/donatoborrello/git/dotfiles
+    
+- debug: msg="System {{ home }} has gateway {{ dotfiles_repo }}"
+
+- name: Symlink dotfiles
+  file: dest={{ home }}/.{{ item }} src={{ dotfiles_repo }}/{{ item }} state=link
+  with_items:
+    - gitconfig
+    - bashrc
+    - vimrc.after
+    #- zshenv
+    #- gemrc
+    #- tmux.conf
+    #- commands
+
+
+
+- name: Symlink Prezto, zsh dotfiles
+  file: dest={{ home }}/.{{ item }} src={{ dotfiles_repo }}/libs/prezto/runcoms/{{ item }} state=link
+  with_items:
       - zlogin
       - zlogout
       - zpreztorc
       - zprofile
       - zshenv
       - zshrc
-    
 
-  tasks:
-    - name: Symlink dotfiles
-      file: dest={{ home }}/.{{ item }} src={{ dotfiles_repo }}/{{ item }} state=link
-      with_items:
-        - gitconfig
-        - bashrc
-        - vimrc.after
-        #- zshenv
-        #- gemrc
-        #- tmux.conf
-        #- commands
-
-    - debug: msg="System {{ home }} has gateway {{ dotfiles_repo }}"
-
-    
-    - name: Symlink Prezto, zsh dotfiles
-      file: dest={{ home }}/.{{ item }} src={{ dotfiles_repo }}/libs/prezto/runcoms/{{ item }} state=link
-      with_items: prezto_files
-
-    - file: dest={{ home }}/.zprezto src={{ dotfiles_repo }}/libs/prezto/ state=link
+- file: dest={{ home }}/.zprezto src={{ dotfiles_repo }}/libs/prezto/ state=link
